@@ -2,13 +2,14 @@
 #
 # Table name: comments
 #
-#  id               :uuid             not null, primary key
-#  commentable_type :string           not null
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  commentable_id   :uuid             not null
-#  parent_id        :integer
-#  user_id          :uuid             not null
+#  id                           :uuid             not null, primary key
+#  body(Comment body)           :text             default(""), not null
+#  commentable_type             :string           not null
+#  created_at                   :datetime         not null
+#  updated_at                   :datetime         not null
+#  commentable_id               :uuid             not null
+#  parent_id(Parent comment id) :integer
+#  user_id                      :uuid             not null
 #
 # Indexes
 #
@@ -22,6 +23,7 @@
 #
 class Comment < ApplicationRecord
   belongs_to :user, optional: true, class_name: "User"
-  belongs_to :commentable, polymorphic: true, optional: true, counter_cache: true, touch: true, class_name: "Post"
+  belongs_to :post, optional: true, class_name: "Post"
+  belongs_to :commentable, polymorphic: true, optional: true, class_name: "Comment"
   has_rich_text :body
 end

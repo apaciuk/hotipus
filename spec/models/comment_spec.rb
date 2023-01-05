@@ -2,13 +2,14 @@
 #
 # Table name: comments
 #
-#  id               :uuid             not null, primary key
-#  commentable_type :string           not null
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  commentable_id   :uuid             not null
-#  parent_id        :integer
-#  user_id          :uuid             not null
+#  id                           :uuid             not null, primary key
+#  body(Comment body)           :text             default(""), not null
+#  commentable_type             :string           not null
+#  created_at                   :datetime         not null
+#  updated_at                   :datetime         not null
+#  commentable_id               :uuid             not null
+#  parent_id(Parent comment id) :integer
+#  user_id                      :uuid             not null
 #
 # Indexes
 #

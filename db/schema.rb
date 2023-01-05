@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_03_214502) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_05_160716) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -65,7 +65,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_03_214502) do
     t.uuid "user_id", null: false
     t.string "commentable_type", null: false
     t.uuid "commentable_id", null: false
-    t.integer "parent_id"
+    t.text "body", default: "", null: false, comment: "Comment body"
+    t.integer "parent_id", comment: "Parent comment id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
@@ -97,8 +98,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_03_214502) do
   end
 
   create_table "posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "title", default: "", null: false
-    t.text "body", default: "", null: false
+    t.string "title", limit: 255, default: "", null: false, comment: "Post title"
+    t.text "body", default: "", null: false, comment: "Post body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
