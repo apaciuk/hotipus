@@ -31,7 +31,7 @@ class User < ApplicationRecord
   has_one_attached :avatar
   has_person_name
   has_noticed_notifications
-
+  has_many :comments, as: :commentable, dependent: :destroy, class_name: "Comment"
   has_many :notifications, as: :recipient, dependent: :destroy
   has_many :services
   validates_uniqueness_of :username 

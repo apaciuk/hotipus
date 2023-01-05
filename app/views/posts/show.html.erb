@@ -14,3 +14,15 @@
   <dt>Body:</dt>
   <dd><%= @post.body %></dd>
 </dl>
+
+<hr />
+
+<h4>Comments</h4>
+
+<% if user_signed_in? %>
+  <%= render partial: 'comments/form', locals: { comment: Comment.new, commentable: @post } %>
+<% else %>
+<%= link_to 'Sign in to comment', new_user_session_path %>
+<% end %>
+
+
